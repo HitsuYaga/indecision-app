@@ -1,24 +1,9 @@
 'use strict';
 
-var app = {
-  title: 'Indecision',
-  subtitle: 'This is some info',
-  options: []
-};
+var visibility = false;
 
-var onFormSubmit = function onFormSubmit(e) {
-  e.preventDefault();
-
-  var option = e.target.elements.option.value;
-  if (option) {
-    app.options.push(option);
-    e.target.elements.option.value = '';
-    render();
-  }
-};
-
-var onRemoveAll = function onRemoveAll() {
-  app.options = [];
+var onShowDetail = function onShowDetail() {
+  visibility = !visibility;
   render();
 };
 
@@ -31,42 +16,20 @@ var render = function render() {
     React.createElement(
       'h1',
       null,
-      app.title
-    ),
-    app.subtitle && React.createElement(
-      'p',
-      null,
-      app.subtitle
-    ),
-    React.createElement(
-      'p',
-      null,
-      app.options.length > 0 ? 'Here is your options' : 'No options'
+      'Visibility Toggle'
     ),
     React.createElement(
       'button',
-      { onClick: onRemoveAll },
-      'Remove all'
+      { onClick: onShowDetail },
+      visibility ? 'Hide details' : 'Show details'
     ),
-    React.createElement(
-      'ol',
+    visibility && React.createElement(
+      'div',
       null,
-      app.options.map(function (option) {
-        return React.createElement(
-          'li',
-          { key: option },
-          option
-        );
-      })
-    ),
-    React.createElement(
-      'form',
-      { onSubmit: onFormSubmit },
-      React.createElement('input', { type: 'text', name: 'option' }),
       React.createElement(
-        'button',
+        'p',
         null,
-        'Add option'
+        'This is some detail that I will show you!'
       )
     )
   );
