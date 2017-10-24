@@ -1,3 +1,5 @@
+// babel src/app.js --out-file=public/scripts/app.js --presets=react,env --watch
+
 class IndecisionApp extends React.Component {  
   render() {
     const title = 'Indecision App';
